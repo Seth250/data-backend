@@ -180,8 +180,7 @@ class Command(BaseCommand):
 
         return data
 
-    @staticmethod
-    def get_files(paths: list[Path]) -> list[Path]:
+    def get_files(self, paths: list[Path]) -> list[Path]:
         files = []
         for path in paths:
             # if the path is a directory, recursively get all files that have our supported extensions
@@ -191,6 +190,11 @@ class Command(BaseCommand):
 
             elif path.is_file() and path.suffix.lower() in SUPPORTED_FILE_EXTENSIONS:
                 files.append(path)
+
+            else:
+                self.stderr.write(
+                    self.style.WARNING(f'Path not found or unsupported: {path}')
+                )
 
         return files
 

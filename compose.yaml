@@ -16,6 +16,7 @@ services:
     build:
       context: .
     restart: on-failure
+    container_name: web
     volumes:
       - static_volume:/app/staticfiles
     expose:
